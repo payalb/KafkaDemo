@@ -13,16 +13,15 @@
 			<artifactId>kafka-clients</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>2.0.0-alpha0</version>
-		</dependency>
 
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
 	</dependencies>
 	<modules>
 
-	<module>KafkaDemo.One</module>
+		<module>KafkaDemo.One</module>
 	</modules>
 </project>
