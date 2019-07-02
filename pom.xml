@@ -23,5 +23,6 @@
 	<modules>
 
 		<module>KafkaDemo.One</module>
+		<module>KafkaDemo.Two-Twitter</module>
 	</modules>
 </project>

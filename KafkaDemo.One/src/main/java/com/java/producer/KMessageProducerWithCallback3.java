@@ -12,8 +12,8 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggerFactory;
 
-public class KMessageProducerWithCallback {
-	static Logger logger= Logger.getLogger(KMessageProducerWithCallback.class);;
+public class KMessageProducerWithCallback3 {
+	static Logger logger= Logger.getLogger(KMessageProducerWithCallback3.class);;
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
 		// Create producer properties
@@ -28,13 +28,27 @@ public class KMessageProducerWithCallback {
 		// Create producer
 		KafkaProducer<String, String> producer = new KafkaProducer<String, String>(prop);
 		// send messages
-		ProducerRecord<String,String> record = new ProducerRecord<>("topic2", "Hello World!");
-		RecordMetadata metadata=producer.send(record).get();
+		
+		for(int i=1; i<=100; i++) {
+			ProducerRecord<String,String> record = new ProducerRecord<>("topic2", "Hello World!"+ i);
+		producer.send(record, new Callback() {
+			
+			@Override
+			public void onCompletion(RecordMetadata metadata, Exception exception) {
+				if(exception==null) {
+				logger.info("Offset value:"+metadata.offset());
+				logger.info("Partition number:"+metadata.partition());
+				logger.info("Timestamp"+ metadata.timestamp());
+				logger.info("Topic:"+ metadata.topic());
+				
+			}else {
+				logger.error(exception.getMessage());
+			}
+			}
+		});
+		}
 
-					logger.info("Offset value:"+metadata.offset());
-					logger.info("Partition number:"+metadata.partition());
-					logger.info("Timestamp"+ metadata.timestamp());
-					logger.info("Topic:"+ metadata.topic());
+					
 					
 		// asynchronous call , running in background.
 		//flush data
