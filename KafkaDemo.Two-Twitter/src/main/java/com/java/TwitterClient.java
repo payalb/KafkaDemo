@@ -66,6 +66,10 @@ public class TwitterClient {
 		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+		properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG,32*1024+"");
+		properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG,"snappy");
+		properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG,"true");
+		properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20");
 		KafkaProducer<String, String> producer= new KafkaProducer<>(properties);
 		return producer;
 	}
@@ -80,7 +84,7 @@ public class TwitterClient {
 		hosebirdEndpoint.trackTerms(terms);
 
 		// These secrets should be read from a config file
-		Authentication hosebirdAuth = new OAuth1("consumeraccesskey", "consumersecret", "accesstoken", "accesstokensecret");
+		Authentication hosebirdAuth = new OAuth1("84Omx2GKC4WIzpLUNvQzye9QM", "dJ8mbPlmhsMldG59gkOtKNX65m16KUOj92tFuqYzqrtR1P5mcL", "1146110273666744320-5zRmJI2ConxDE0CsUWYNIJ1PZpG3Vq", "hFNEpzoEpA4wAKs8lO1Q2WOdq7FksN4UTFhjiNgnCKAK5");
 		
 		ClientBuilder builder = new ClientBuilder()
 				  .name("Hosebird-Client-01")                              // optional: mainly for the logs
