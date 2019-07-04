@@ -26,5 +26,6 @@
 		<module>KafkaDemo.Two-Twitter</module>
 		<module>KafkaDemo.Three-ProducerAcks</module>
 		<module>KafkaDemo.ConsumerElasticSearch</module>
+		<module>KafkaDemo.ConnectTwitterSource</module>
 	</modules>
 </project>
